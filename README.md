@@ -15,7 +15,7 @@ against `bench-target.internal`, a maintainer-run host on an isolated bridge.
 | `tasks/` | one directory per task family, `<n>-<code>-<slug>` |
 | `tasks/_shared/` | the host manifest and the compose base every family overlays |
 | `rules/` | detection rules replayed against recorded captures |
-| `runs/` | raw run logs, one JSON object per line |
+| `runs/` | raw run logs, JSONL: our writers emit one JSON object per line |
 | `out/` | generated artefacts: indexes, summaries, audit records, quarantine |
 | `deploy/` | deployment config. Real values come from the secret store, not from here |
 | `models/` | evaluated checkpoints, stored as LFS pointers |
@@ -30,8 +30,15 @@ against `bench-target.internal`, a maintainer-run host on an isolated bridge.
   fixture from being mistaken for production code.
 * Task containers are offline. `network_mode: none` in the compose overlay, and nothing in
   `sentinel_bench/` may open a socket to anything but loopback.
-* Run logs are append-only JSONL. Readers must tolerate a truncated trailing line, because
-  a run that is killed mid-write leaves one.
+* Run logs are append-only JSONL. Our writers emit one compact JSON object per line, but
+  readers must not assume it: `sentinel_bench.runlog` parses by record, so a record
+  pretty-printed across several lines reads as one record. Logs handed to us from outside
+  the suite are the reason.
+* Readers must also tolerate a truncated trailing record, because a run that is killed
+  mid-write leaves one. `runlog.read_records` drops it; `runlog.iter_events` raises
+  `RunLogDecodeError`, which names the file and line to look at.
+* A record is a JSON object. Both readers skip or reject anything else, which is what
+  stops the fragments of a half-written record from looking like records.
 
 ## Running a family
 
