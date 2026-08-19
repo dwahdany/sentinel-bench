@@ -35,7 +35,10 @@ against `bench-target.internal`, a maintainer-run host on an isolated bridge.
   pretty-printed across several lines reads as one record. Logs handed to us from outside
   the suite are the reason.
 * Readers must also tolerate a truncated trailing record, because a run that is killed
-  mid-write leaves one. `runlog.read_records` drops it; `runlog.iter_events` raises.
+  mid-write leaves one. `runlog.read_records` drops it; `runlog.iter_events` raises
+  `RunLogDecodeError`, which names the file and line to look at.
+* A record is a JSON object. Both readers skip or reject anything else, which is what
+  stops the fragments of a half-written record from looking like records.
 
 ## Running a family
 

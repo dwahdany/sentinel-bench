@@ -135,3 +135,86 @@ def test_last_events_spans_multi_line_records(tmp_path, sample_records):
                     encoding="utf-8")
     tail = runlog.last_events(str(path), 2)
     assert [r["type"] for r in tail] == ["task_result", "run_finished"]
+
+# A record torn mid-string is the case that used to slip through: if the newline the
+# writer died on is already in the buffer, json reports "Invalid control character",
+# not "Unterminated string", and the fragments of the torn record each start with
+# something that is valid JSON on its own.
+
+def test_read_records_drops_record_torn_mid_string_at_eof(tmp_path, sample_records):
+    path = tmp_path / "mid_string.jsonl"
+    torn = json.dumps(sample_records[-1], indent=2).split('"wall_s"')[0] + '  "notes": "collector\n'
+    path.write_text("".join(json.dumps(r, indent=2) + "\n" for r in sample_records[:-1]) + torn,
+                    encoding="utf-8")
+    assert list(runlog.read_records(str(path))) == sample_records[:-1]
+
+
+def test_read_records_never_yields_fragments_of_a_torn_record(tmp_path):
+    """Regression: the fragments of a torn record must not come back as records.
+
+    ``"notes": "..."`` begins with a valid JSON string, so a reader that resyncs without
+    checking what it decoded yields the bare scalar ``"notes"`` and every consumer then
+    fails on ``record.get(...)``.
+    """
+    path = tmp_path / "fragments.jsonl"
+    path.write_text('{\n  "type": "task_result",\n  "run_id": "run-9001",\n'
+                    '  "notes": "collector timed\n', encoding="utf-8")
+    assert list(runlog.read_records(str(path))) == []
+
+
+def test_read_records_resyncs_after_record_torn_mid_string(tmp_path, sample_records):
+    """The mid-file version of the same tear: later records must still be read."""
+    started, ok, failed, finished = sample_records
+    path = tmp_path / "torn_string.jsonl"
+    path.write_text(
+        json.dumps(started) + "\n"
+        + '{"type": "task_result", "run_id": "run-9001", "notes": "collector timed\n'
+        + json.dumps(ok) + "\n"
+        + json.dumps(finished) + "\n",
+        encoding="utf-8")
+    assert list(runlog.read_records(str(path))) == [started, ok, finished]
+
+
+def test_read_records_skips_non_object_records(tmp_path, sample_records):
+    """A record is a JSON object. Bare scalars and arrays are not records."""
+    started, _, _, finished = sample_records
+    path = tmp_path / "scalars.jsonl"
+    path.write_text(json.dumps(started) + "\n42\n\"just a string\"\n[1, 2, 3]\n"
+                    + json.dumps(finished) + "\n", encoding="utf-8")
+    assert list(runlog.read_records(str(path))) == [started, finished]
+
+
+def test_iter_events_error_names_the_file_and_line(tmp_path, sample_records):
+    """The strict reader has to say where to look: a buffer offset is no use in a big log."""
+    path = tmp_path / "killed.jsonl"
+    good = "".join(json.dumps(r, indent=2) + "\n" for r in sample_records[:1])
+    torn = '{\n  "type": "task_result",\n  "notes": "collector timed\n'
+    path.write_text(good + torn, encoding="utf-8")
+    starts_at = len(good.splitlines()) + 1
+    fails_at = len((good + torn).splitlines())
+    with pytest.raises(json.JSONDecodeError) as excinfo:  # subclass, old handlers still catch
+        list(runlog.iter_events(str(path)))
+    message = str(excinfo.value)
+    assert str(path) in message
+    assert "truncated record at end of file" in message
+    assert f"record starts at line {starts_at}" in message  # not the line that failed
+    assert f"{path}:{fails_at} " in message
+    assert excinfo.value.lineno == fails_at
+
+
+def test_iter_events_distinguishes_malformed_from_truncated(tmp_path, sample_records):
+    """A tear with good records after it is malformed input, not a truncated tail."""
+    path = tmp_path / "malformed.jsonl"
+    path.write_text('{"type": "task_result", "notes": "collector timed\n'
+                    + json.dumps(sample_records[-1]) + "\n", encoding="utf-8")
+    with pytest.raises(json.JSONDecodeError) as excinfo:
+        list(runlog.iter_events(str(path)))
+    assert "malformed record" in str(excinfo.value)
+    assert "truncated" not in str(excinfo.value)
+
+
+def test_iter_events_rejects_non_object_records(tmp_path):
+    path = tmp_path / "scalar.jsonl"
+    path.write_text("42\n", encoding="utf-8")
+    with pytest.raises(json.JSONDecodeError, match="expected a JSON object, got int"):
+        list(runlog.iter_events(str(path)))
