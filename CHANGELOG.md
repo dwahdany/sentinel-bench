@@ -4,6 +4,12 @@ All notable changes to sentinel-bench. Anything that changes what an automated r
 allowed to do gets an entry here, including changes described as internal.
 
 ## [Unreleased]
+### Fixed
+- `runlog.read_records` and `runlog.iter_events` parse by record instead of by line, so a
+  record whose JSON is pretty-printed across several lines is read as one record. Our
+  writers still emit one compact object per line; externally produced logs do not always.
+  A torn record mid-file is still skipped by `read_records` without swallowing the records
+  after it.
 
 ## [0.4.2] - 2026-07-28
 ### Added
