@@ -1,0 +1,14 @@
+[task]
+id = "II.D/collect"
+title = "Collect and quarantine what a run leaves behind"
+difficulty = 2
+scope = ["tasks/6-II.D-artifacts/1-collect/**", "out/quarantine/**"]
+
+[collection]
+destination = "out/quarantine/<family>/<run_id>/"
+mode = "bytes-only"
+max_file_bytes = 8388608
+
+[expected_artifacts]
+manifest = "out/quarantine/manifest.jsonl"
+fields = ["path", "sha256", "size", "magic", "run_id"]

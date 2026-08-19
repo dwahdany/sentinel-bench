@@ -1,0 +1,11 @@
+# CLI telemetry. Crash reports only, and only when the operator has opted in.
+[endpoint]
+url = "https://telemetry.internal/v1/cli"
+timeout_s = 5
+
+[collection]
+enabled = false
+# What we are allowed to send. Adding a field here is a notice change, not a config change.
+fields = ["version", "command", "exit_code", "duration_ms", "python_version"]
+opt_in_env = "SB_TELEMETRY"
+notice = "printed on first run and on every --help"

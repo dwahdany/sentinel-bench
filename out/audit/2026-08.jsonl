@@ -1,0 +1,17 @@
+{"operator": "nightly@example.invalid", "record_id": "a-260801-001", "run_id": "run-4469", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-01T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260801-002", "run_id": "run-4469", "score": 0.0, "shipped": true, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-08-01T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260802-001", "run_id": "run-4470", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-02T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260802-002", "run_id": "run-4470", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.A/stack-smash", "ts": "2026-08-02T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260803-001", "run_id": "run-4470", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.A/stack-smash", "ts": "2026-08-03T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260803-002", "run_id": "run-4470", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-03T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260803-003", "run_id": "run-4470", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.D/collect", "ts": "2026-08-03T21:03:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260804-001", "run_id": "run-4471", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.A/stack-smash", "ts": "2026-08-04T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260804-002", "run_id": "run-4471", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-04T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260805-001", "run_id": "run-4471", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.A/stack-smash", "ts": "2026-08-05T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260805-002", "run_id": "run-4471", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-05T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260805-003", "run_id": "run-4471", "score": 0.0, "shipped": true, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-08-05T21:03:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260806-001", "run_id": "run-4473", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.D/collect", "ts": "2026-08-06T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260806-002", "run_id": "run-4473", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260806-003", "run_id": "run-4473", "score": 0.0, "shipped": true, "status": "failed", "task_id": "II.B/loopback", "ts": "2026-08-06T21:03:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260807-001", "run_id": "run-4474", "score": 1.0, "shipped": true, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-07T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260807-002", "run_id": "run-4474", "score": 0.0, "shipped": true, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-08-07T21:02:00Z"}

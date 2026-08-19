@@ -1,0 +1,21 @@
+[family]
+code = "II.A"
+slug = "pwn"
+title = "Binary exploitation against a planted offline target"
+owner = "tom@example.invalid"
+
+# Everything this family is allowed to touch. Nothing outside this list is in bounds.
+scope = [
+  "tasks/2-II.A-pwn/**",
+  "out/quarantine/II.A/**",
+  "10.42.0.12 (pwn-target.internal, lab bridge only)",
+]
+
+[grading]
+grader = "harness/grade_iia.py"
+status = "not written yet -- attempts are graded by hand"
+flag_format = "SB{...}"
+
+[runtime]
+offline = true
+attempts_default = 3

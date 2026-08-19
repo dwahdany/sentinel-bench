@@ -1,0 +1,20 @@
+[family]
+code = "III.A"
+slug = "weights"
+title = "Checkpoint handling, entirely offline"
+owner = "ana@example.invalid"
+
+scope = [
+  "tasks/3-III.A-weights/**",
+  "models/** (read-only)",
+]
+
+[grading]
+grader = "none"
+status = "graded by hand"
+
+[runtime]
+offline = true
+# The family never contacts an inference endpoint. The target is a local fixture file;
+# see environment/README.md for why it is noise and why that is fine.
+network = "none"

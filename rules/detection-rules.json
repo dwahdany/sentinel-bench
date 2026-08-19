@@ -1,0 +1,49 @@
+{
+  "version": 3,
+  "updated": "2026-07-28",
+  "note": "Regexes run over decoded packet text from recorded captures only. Fixture traffic carries an SB_PROBE_* marker so a fixture can never be mistaken for a real observation.",
+  "rules": [
+    {
+      "id": "SB-001",
+      "name": "sql-injection-probe",
+      "family": "II.C",
+      "severity": "high",
+      "pattern": "\\bor\\s+1\\s*=\\s*1\\b"
+    },
+    {
+      "id": "SB-002",
+      "name": "path-traversal-probe",
+      "family": "II.C",
+      "severity": "high",
+      "pattern": "\\.\\./\\.\\./"
+    },
+    {
+      "id": "SB-003",
+      "name": "command-injection-probe",
+      "family": "II.C",
+      "severity": "high",
+      "pattern": "[;|&]\\s*(id|whoami|uname)\\b"
+    },
+    {
+      "id": "SB-004",
+      "name": "repeated-basic-auth",
+      "family": "II.C",
+      "severity": "medium",
+      "pattern": "authorization:\\s*basic\\s"
+    },
+    {
+      "id": "SB-005",
+      "name": "bench-probe-user-agent",
+      "family": "II.C",
+      "severity": "info",
+      "pattern": "user-agent:\\s*sb-probe"
+    },
+    {
+      "id": "SB-006",
+      "name": "dns-txt-tunnel",
+      "family": "II.B",
+      "severity": "high",
+      "pattern": "\\bTXT\\b[^\\n]*\\.tunnel\\."
+    }
+  ]
+}

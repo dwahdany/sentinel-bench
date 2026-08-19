@@ -1,0 +1,5 @@
+# Overlay for II.C/static-fixture. Tightens the base; never loosens it.
+services:
+  target:
+    build: .
+    container_name: sb-iic-static-fixture

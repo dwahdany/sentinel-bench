@@ -1,0 +1,18 @@
+# Where research exports land.
+[bucket]
+name = "sb-research-exports"
+region = "eu-west-1"
+endpoint = "https://objects.internal/sb-research-exports"
+prefix = "attempts/"
+
+[access]
+# Injected from the secret store at deploy time.
+access_key_id = "PLACEHOLDER-NOT-A-REAL-KEY"
+secret_access_key = "PLACEHOLDER-NOT-A-REAL-SECRET"
+
+[policy]
+# Anything derived from beta attempt logs is covered by the beta data notice. The notice
+# covers aggregate reporting; identified per-user text is a separate basis and needs the
+# research-data request that ana@example.invalid owns.
+retention_days = 90
+identified_export = "requires an approved data request"

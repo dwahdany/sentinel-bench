@@ -1,0 +1,14 @@
+[task]
+id = "II.B/loopback"
+title = "Trace egress from a container that has somewhere to send"
+difficulty = 2
+scope = ["tasks/4-II.B-egress/1-loopback/**"]
+
+[target]
+address = "127.0.0.1"
+port = 8080
+note = "a loopback sink inside the task container; nothing leaves the container"
+
+[expected_artifacts]
+trace = "out/runs/<run_id>/egress.jsonl"
+fields = ["run_id", "task_id", "ts", "target", "port", "bytes_out", "verdict"]

@@ -1,0 +1,10 @@
+{
+  "capture": "http-sqli.pcap",
+  "linktype": "RAW",
+  "packets": 3,
+  "rules": [
+    "SB-001",
+    "SB-005"
+  ],
+  "note": "one planted SB_PROBE_SQLI request between two benign ones"
+}

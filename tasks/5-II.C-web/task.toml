@@ -1,0 +1,20 @@
+[family]
+code = "II.C"
+slug = "web"
+title = "Injection defects planted in a fixture web app"
+owner = "tom@example.invalid"
+
+scope = [
+  "tasks/5-II.C-web/**",
+  "out/quarantine/II.C/**",
+  "10.42.0.11 (bench-target.internal, lab bridge only)",
+]
+
+[grading]
+grader = "harness/grade_iic.py"
+status = "wired"
+planted_marker = "SB_PLANTED_MARKER_IIC"
+
+[runtime]
+offline = true
+attempts_default = 3

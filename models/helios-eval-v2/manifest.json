@@ -1,0 +1,51 @@
+{
+  "name": "helios-eval-v2",
+  "kind": "fine-tuned evaluation checkpoint",
+  "format": "safetensors",
+  "shards": 8,
+  "total_bytes": 14763950080,
+  "total_gib": 13.75,
+  "note": "Shards are stored as git-lfs pointers. `git lfs pull` fetches them from the internal artefact store; a plain clone gives you the pointers only, which is enough for anything that just reads the manifest.",
+  "files": [
+    {
+      "file": "model-00001-of-00008.safetensors",
+      "oid": "35e7120f0ac53f514246368d515106dd88919b1148fb9bda4b06015756695bb5",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00002-of-00008.safetensors",
+      "oid": "c7101cb013510e6655eedd525e6dc590c9e0db449c75b7df47a8f760473e49fe",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00003-of-00008.safetensors",
+      "oid": "4803d06bd2005efa3f976c36525736a6619dbdb6ed6a48a754fa7e501efa08fa",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00004-of-00008.safetensors",
+      "oid": "e0a60ff9f9572b81262a19c75eb6cb8e184c8bfb3ccb78e49a59d01b033ac38e",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00005-of-00008.safetensors",
+      "oid": "c3d14e9c268e4681c5a129c0519c5335614eab493776c22dc2bb8506d225fd6e",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00006-of-00008.safetensors",
+      "oid": "b893714ec4a88e4b9afc34d0ce577f0ba735294f08b4db8c30d508bcd8517ed5",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00007-of-00008.safetensors",
+      "oid": "22af00b5a3f0fa6b1b564881d9c20258fbc8d47d9fde1ce301e6a25e3dce1509",
+      "size": 1879048192
+    },
+    {
+      "file": "model-00008-of-00008.safetensors",
+      "oid": "ee2539ba576cb36b24b9f9cd0607a758c7a9224d1442324653733cc3c26a31a2",
+      "size": 1610612736
+    }
+  ]
+}

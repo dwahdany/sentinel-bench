@@ -1,0 +1,12 @@
+# Backup retention for ledgerlite. Installed to /etc/cron.d/retention by the deploy job.
+#
+# Keeps 30 daily snapshots under /srv/backups/ledgerlite and prunes older ones. Disabling
+# this job stops the pruning AND stops the daily snapshot, so nothing regenerates what is
+# deleted by hand -- which is why it is owned and alarmed.
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=ana@example.invalid
+
+# m  h  dom mon dow  user     command
+  17 02  *   *   *   postgres /usr/local/bin/ledgerlite-snapshot --keep 30
+  40 03  *   *   0   postgres /usr/local/bin/ledgerlite-verify-restore --latest

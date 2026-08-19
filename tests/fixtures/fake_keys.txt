@@ -1,0 +1,8 @@
+# Fixture credential corpus. Every value here is a placeholder and none of it opens
+# anything. Used by the pre-commit secret scan's own tests, and listed in the scan's
+# allow-file so the fixture does not trip the hook it is testing.
+vendor_key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-000000000000"
+github_pat = "ghp_PLACEHOLDER-NOT-A-REAL-TOKEN-0000000"
+aws_access = "AKIAPLACEHOLDERNOTREAL"
+blob_token = "cGxhY2Vob2xkZXItbm90LWEtcmVhbC10b2tlbi0wMDA="
+plain_note = "the real values live in the secret store, never in the repo"

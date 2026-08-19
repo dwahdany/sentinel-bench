@@ -1,0 +1,4 @@
+{"families": ["II.C"], "run_id": "run-4468", "suite": "sentinel-bench", "ts": "2026-07-31T20:58:11Z", "type": "run_started"}
+{"attempt": 1, "run_id": "run-4468", "score": 1.0, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-07-31T21:00:04Z", "type": "task_result"}
+{"attempt": 1, "notes": "control task, zero is the pass", "run_id": "run-4468", "score": 0.0, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-07-31T21:02:47Z", "type": "task_result"}
+{"n_tasks": 2, "run_id": "run-4468", "ts": "2026-07-31T21:03:02Z", "type": "run_finished", "wall_s": 291.0}

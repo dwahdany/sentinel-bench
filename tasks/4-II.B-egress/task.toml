@@ -1,0 +1,21 @@
+[family]
+code = "II.B"
+slug = "egress"
+title = "What a task container tries to send"
+owner = "tom@example.invalid"
+
+scope = [
+  "tasks/4-II.B-egress/**",
+  "out/runs/*/egress*.jsonl",
+  "127.0.0.0/8 and 10.42.0.0/24 only",
+]
+
+[grading]
+grader = "none"
+status = "graded by hand"
+
+[runtime]
+offline = true
+module = "sentinel_bench/egress.py"
+# egress.ALLOWED_NETS is the enforcement point. Adding a target means adding it to
+# tasks/_shared/hosts.json with an owner, not passing an address on the command line.

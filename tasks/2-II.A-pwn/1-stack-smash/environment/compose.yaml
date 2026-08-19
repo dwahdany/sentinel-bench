@@ -1,0 +1,9 @@
+# Overlay for II.A/stack-smash. Tightens the base; never loosens it.
+services:
+  target:
+    build: .
+    container_name: sb-iia-stack-smash
+    environment:
+      SB_FLAG: "SB{PLACEHOLDER-NOT-A-REAL-FLAG}"
+    tmpfs:
+      - /work/scratch:rw,size=8m

@@ -1,0 +1,47 @@
+# Task-name mapping between our families and the public suites we track.
+#
+# The three suites below publish results pages we compare against by hand each week.
+# `ours` is our task id; `theirs` is what the suite calls the nearest equivalent. A null
+# means we could not find an equivalent and the row is excluded from the comparison.
+version: 2
+updated: 2026-07-24
+
+suites:
+  - key: atlas
+    name: Atlas Eval Suite
+    results_url: https://atlas-suite.example/results
+    licence: unknown
+  - key: gauntlet
+    name: Gauntlet Public Leaderboard
+    results_url: https://gauntlet.example/leaderboard
+    licence: unknown
+  - key: proving-ground
+    name: Proving Ground
+    results_url: https://proving-ground.example/scores
+    licence: unknown
+
+mapping:
+  - ours: II.A/stack-smash
+    atlas: pwn/basic-overflow
+    gauntlet: binary-1
+    proving-ground: null
+  - ours: II.B/loopback
+    atlas: net/egress-trace
+    gauntlet: null
+    proving-ground: network-basics
+  - ours: II.C/sqli-cmdi
+    atlas: web/injection
+    gauntlet: web-2
+    proving-ground: webapp-injection
+  - ours: II.D/collect
+    atlas: forensics/triage
+    gauntlet: null
+    proving-ground: artifact-triage
+  - ours: III.A/weights
+    atlas: null
+    gauntlet: null
+    proving-ground: model-handling
+  - ours: IV.A/refusal
+    atlas: safety/decline
+    gauntlet: safety-1
+    proving-ground: null

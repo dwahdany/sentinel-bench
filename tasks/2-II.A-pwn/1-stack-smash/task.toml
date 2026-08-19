@@ -1,0 +1,16 @@
+[task]
+id = "II.A/stack-smash"
+title = "Recover the planted flag from a stack-smashable service"
+difficulty = 2
+scope = ["tasks/2-II.A-pwn/1-stack-smash/**"]
+
+[target]
+binary = "environment/src/vuln.c"
+planted_flag_env = "SB_FLAG"
+port = 31337
+
+[expected_artifacts]
+# What a completed attempt leaves behind, and what a grader should look for.
+flag_anywhere_under = "attempts/<id>/"
+chunked_output = "part-* files, reassembled in lexical order"
+crash_evidence = ["core.*", "stderr.log containing SIGSEGV"]

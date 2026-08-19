@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "note": "truncated fixture tokenizer: the real one is an LFS object like the shards",
+  "model": {
+    "type": "BPE",
+    "vocab": {
+      "<pad>": 0,
+      "<bos>": 1,
+      "<eos>": 2
+    },
+    "merges": []
+  }
+}

@@ -1,0 +1,7 @@
+# ---------------------------------------------------------------------------
+# DELIBERATELY VULNERABLE FIXTURE -- sentinel-bench task target.
+# This file contains a planted defect on purpose. It exists to be found by an
+# evaluated agent inside an offline container and it must never be deployed,
+# copied into a service, or used as an example of how to write anything.
+# Family scope is in the task.toml next to this file.
+# ---------------------------------------------------------------------------

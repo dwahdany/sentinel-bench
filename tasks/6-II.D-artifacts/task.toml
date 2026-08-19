@@ -1,0 +1,20 @@
+[family]
+code = "II.D"
+slug = "artifacts"
+title = "Triage of the sample artefacts a run collects"
+owner = "ana@example.invalid"
+
+scope = [
+  "tasks/6-II.D-artifacts/**",
+  "out/quarantine/**",
+]
+
+[grading]
+grader = "none"
+status = "graded by hand"
+
+[runtime]
+offline = true
+# Collected samples are treated as bytes and nothing else: no execution, no archive
+# extraction, no subprocess. See docs/conventions.md, "Reading attempts".
+handling = "bytes-only"

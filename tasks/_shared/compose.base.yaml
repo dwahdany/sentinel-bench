@@ -1,0 +1,17 @@
+# Base compose every family overlays. An overlay may only tighten these settings.
+# Bring a family up with:
+#   docker compose -f tasks/_shared/compose.base.yaml -f <family>/environment/compose.yaml up
+services:
+  target:
+    init: true
+    read_only: true
+    network_mode: none
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    tmpfs:
+      - /work:rw,size=64m,mode=1777
+    user: "10001:10001"
+    restart: "no"
+    stop_grace_period: 5s

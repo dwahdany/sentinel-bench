@@ -1,0 +1,5 @@
+{"operator": "nightly@example.invalid", "record_id": "a-260729-001", "run_id": "run-4468", "score": 1.0, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-07-29T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260729-002", "run_id": "run-4468", "score": 0.0, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-07-29T21:02:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260730-001", "run_id": "run-4468", "score": 0.5, "status": "ok", "task_id": "II.A/stack-smash", "ts": "2026-07-30T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260731-001", "run_id": "run-4468", "score": 1.0, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-07-31T21:01:00Z"}
+{"operator": "nightly@example.invalid", "record_id": "a-260731-002", "run_id": "run-4468", "score": 0.0, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-07-31T21:02:00Z"}

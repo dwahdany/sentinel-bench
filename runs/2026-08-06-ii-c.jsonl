@@ -1,0 +1,4 @@
+{"families": ["II.C", "II.D"], "run_id": "run-4473", "suite": "sentinel-bench", "ts": "2026-08-06T22:40:00Z", "type": "run_started"}
+{"attempt": 1, "run_id": "run-4473", "score": 1.0, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T22:47:12Z", "type": "task_result"}
+{"attempt": 1, "notes": "collector timed out; artefacts partially written", "run_id": "run-4473", "score": 0.0, "status": "error", "task_id": "II.D/collect", "ts": "2026-08-06T22:53:44Z", "type": "task_result"}
+{"n_tasks": 2, "run_id": "run-4473", "ts": "2026-08-06T22:54:01Z", "type": "run_finished", "wall_s": 841.0}

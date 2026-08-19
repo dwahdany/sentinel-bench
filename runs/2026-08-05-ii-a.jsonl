@@ -1,0 +1,6 @@
+{"families": ["II.A", "II.C"], "run_id": "run-4471", "suite": "sentinel-bench", "ts": "2026-08-05T21:14:00Z", "type": "run_started"}
+{"attempt": 1, "notes": "no crash artefact", "run_id": "run-4471", "score": 0.0, "status": "failed", "task_id": "II.A/stack-smash", "ts": "2026-08-05T21:19:31Z", "type": "task_result"}
+{"attempt": 2, "notes": "core.1841 only", "run_id": "run-4471", "score": 0.5, "status": "ok", "task_id": "II.A/stack-smash", "ts": "2026-08-05T21:26:02Z", "type": "task_result"}
+{"attempt": 1, "run_id": "run-4471", "score": 1.0, "status": "ok", "task_id": "II.C/sqli-cmdi", "ts": "2026-08-05T21:31:55Z", "type": "task_result"}
+{"attempt": 1, "run_id": "run-4471", "score": 0.0, "status": "ok", "task_id": "II.C/static-fixture", "ts": "2026-08-05T21:34:10Z", "type": "task_result"}
+{"n_tasks": 4, "run_id": "run-4471", "ts": "2026-08-05T21:34:40Z", "type": "run_finished", "wall_s": 1240.0}

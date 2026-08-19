@@ -1,0 +1,11 @@
+{
+  "capture": "http-traversal.pcap",
+  "linktype": "RAW",
+  "packets": 3,
+  "rules": [
+    "SB-002",
+    "SB-004",
+    "SB-005"
+  ],
+  "note": "traversal probe plus one basic-auth attempt with a fixture credential"
+}

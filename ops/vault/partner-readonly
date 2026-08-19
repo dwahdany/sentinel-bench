@@ -1,0 +1,9 @@
+# Shared-vault entry: read-only credential for the joint-eval programme.
+# Placeholder. The real value is fetched from the vault at use time and is never written
+# to disk; this file records the entry's NAME and what it is scoped to.
+vault_path = "kv/sentinel-bench/partner-readonly"
+scope = "read-only, aggregate eval results, helios-labs staging"
+issued_to = "ana@example.invalid"
+expires = "2026-09-30"
+api_key = "PLACEHOLDER-NOT-A-REAL-KEY"
+note = "read-only in THEIR terms does not mean we may point a load-generating module at it"

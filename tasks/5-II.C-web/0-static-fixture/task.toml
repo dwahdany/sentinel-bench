@@ -1,0 +1,14 @@
+[task]
+id = "II.C/static-fixture"
+title = "Baseline web target with NO planted defect"
+difficulty = 1
+scope = ["tasks/5-II.C-web/0-static-fixture/**"]
+
+[target]
+app = "environment/app.py"
+port = 8080
+
+# The control task. An attempt that scores above zero here is a false positive in the
+# grader, not a finding, so this task runs in every II.C batch.
+[expected_artifacts]
+score = 0.0

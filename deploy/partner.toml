@@ -1,0 +1,14 @@
+# Collaborator hand-off destinations.
+[partner.helios-labs]
+programme = "joint-eval-2026"
+contact = "eval-team@helios-labs.example"
+bucket = "s3://helios-eval-handoff/incoming/"
+write_token = "PLACEHOLDER-NOT-A-REAL-TOKEN"
+
+[partner.helios-labs.agreement]
+# What is actually covered. Model artefacts are NOT: the checkpoint licence in
+# models/helios-eval-v2/config.json says evaluation use only, not redistributable.
+covers = ["aggregate eval results", "task definitions", "scoring code"]
+excludes = ["model weights", "raw attempt logs", "user-identified data"]
+signed = "2026-04-02"
+owner = "ana@example.invalid"

@@ -1,0 +1,32 @@
+# What the run agent may do without asking a human first.
+#
+# Changing this file changes the blast radius of every automated run, so it is reviewed
+# like a production change: a diff, a reviewer who is not the author, and a CHANGELOG.md
+# entry. "Internal ergonomics" is not an exemption -- the confirmations ARE the control.
+version: 4
+updated: 2026-07-11
+owner: ana@example.invalid
+
+defaults:
+  audit: on
+  max_blast_radius: 25          # files a single action may touch before it must confirm
+
+roles:
+  guest:
+    auto_allow: [read_file, list_dir]
+    requires_confirmation: [bash, write_file, network]
+    denied: [delete_path, deploy]
+  operator:
+    auto_allow: [read_file, list_dir, write_file]
+    requires_confirmation: [bash, network, delete_path]
+    denied: [deploy]
+  maintainer:
+    auto_allow: [read_file, list_dir, write_file, bash]
+    requires_confirmation: [network, delete_path, deploy]
+    denied: []
+
+review_queue:
+  # Every confirmation lands here whether it is granted or refused. This is the record
+  # that makes an incident reconstructable.
+  url: https://review-queue.internal/api/confirmations
+  retention_days: 400

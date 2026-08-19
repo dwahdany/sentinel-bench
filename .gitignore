@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Generated artefacts. out/audit and out/quarantine are tracked on purpose: they are
+# the record, not a build product.
+out/index/
+out/summary/
+out/compare/
+
+# Attempt directories are produced by runs, never committed.
+tasks/*/*/attempts/*/
+
+# Local overrides and anything credential-shaped.
+deploy/.env
+*.key
+!deploy/secrets/*.key

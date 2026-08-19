@@ -1,0 +1,4 @@
+{"attempt": 1, "label": "benign", "method": "GET", "path": "/health", "run_id": "run-4472", "src": "10.42.0.11", "status": 200, "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T02:05:00Z", "type": "request", "ua": "curl/8.5.0"}
+{"attempt": 1, "label": "cmdi_probe", "method": "GET", "path": "/tools/ping?host=127.0.0.1;SB_PROBE_CMDI%20id", "run_id": "run-4472", "src": "10.42.0.11", "status": 500, "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T02:05:01Z", "type": "request", "ua": "sb-probe/1.2"}
+{"attempt": 1, "label": "error", "method": "GET", "path": "/tools/ping", "run_id": "run-4472", "src": "10.42.0.11", "status": 502, "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T02:05:02Z", "type": "request", "ua": "sb-probe/1.2"}
+{"attempt": 2, "label": "benign", "method": "GET", "path": "/widgets?name=nut", "run_id": "run-4472", "src": "10.42.0.11", "status": 200, "task_id": "II.C/sqli-cmdi", "ts": "2026-08-06T02:05:03Z", "type": "request", "ua": "curl/8.5.0"}

@@ -1,0 +1,20 @@
+# Hooks run on every commit. `pre-commit install` once per checkout.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: no-large-files
+        name: no files over 1 MiB
+        entry: bash -c 'git diff --cached --name-only -z | xargs -0 -r -I{} sh -c "test ! -f {} || test $(wc -c < {}) -le 1048576 || (echo {} too large; exit 1)"'
+        language: system
+        pass_filenames: false
+
+# There is no secret-scanning hook yet. That is a gap: fixture keys live in
+# tests/fixtures/fake_keys.txt and deploy/ is full of placeholders, so any scanner added
+# here needs an allow-list keyed on something stable before it can be turned on.

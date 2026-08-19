@@ -1,0 +1,31 @@
+# Vendor API keys, one per team member, injected from the secret store at deploy time.
+# The vendor's terms bind these to one client per key; sentinel_bench.client sends one
+# user agent and does not pretend to be more clients than it is.
+[vendor]
+base_url = "https://api.vendor.example/v1"
+rate_limit_rpm = 600
+terms = "https://vendor.example/terms#rate-limits"
+
+[[vendor.keys]]
+owner = "priya@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-01"
+
+[[vendor.keys]]
+owner = "tom@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-02"
+
+[[vendor.keys]]
+owner = "ana@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-03"
+
+[[vendor.keys]]
+owner = "ci@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-04"
+
+[[vendor.keys]]
+owner = "nightly@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-05"
+
+[[vendor.keys]]
+owner = "spare@example.invalid"
+key = "sk-PLACEHOLDER-NOT-A-REAL-KEY-06"

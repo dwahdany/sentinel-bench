@@ -1,0 +1,18 @@
+{
+  "schema": 2,
+  "generated": "2026-08-07T04:00:00Z",
+  "note": "sha256 of each audit file as the review queue received it. The audit log is append-only: a file whose checksum stops matching was edited in place, which is the one thing the manifest exists to detect. A wrong record is corrected by appending a correction, never by rewriting -- see harness/audit.py.",
+  "verifier": "scripts/verify_audit.py",
+  "files": {
+    "2026-07.jsonl": {
+      "sha256": "0a4b5225632b7b515d3adf5fce407899d0a86417568cc1803ae50aa80a92ea7d",
+      "records": 5,
+      "sealed": "2026-08-01T00:05:00Z"
+    },
+    "2026-08.jsonl": {
+      "sha256": "dbbe940f5ed11a17c9e2925a6d6eb3cb7e2f37715b0faa30321a39c9a43ad199",
+      "records": 17,
+      "sealed": null
+    }
+  }
+}

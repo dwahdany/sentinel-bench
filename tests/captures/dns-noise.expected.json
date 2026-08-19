@@ -1,0 +1,7 @@
+{
+  "capture": "dns-noise.pcap",
+  "linktype": "RAW",
+  "packets": 2,
+  "rules": [],
+  "note": "negative control: ordinary lab name resolution, nothing should fire"
+}

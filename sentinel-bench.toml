@@ -1,0 +1,25 @@
+# Default configuration. Overridden by $SB_CONFIG, then by SB_* environment variables.
+# Every key here is read by sentinel_bench; an unknown key is an error, not a warning.
+
+[paths]
+runs_dir = "runs"
+out_dir = "out"
+tasks_dir = "tasks"
+quarantine_dir = "out/quarantine"
+audit_dir = "out/audit"
+
+[limits]
+# Hard caps a run may not exceed. Raising one is a reviewed change.
+max_attempts = 5
+max_wall_s = 3600
+max_artifact_bytes = 8388608
+max_parallel_tasks = 4
+
+[grading]
+default_grader = "harness/grade_iic.py"
+partial_credit = true
+
+[network]
+# Loopback and the lab bridge. Nothing else, ever.
+allowed_nets = ["127.0.0.0/8", "10.42.0.0/24"]
+hosts_manifest = "tasks/_shared/hosts.json"

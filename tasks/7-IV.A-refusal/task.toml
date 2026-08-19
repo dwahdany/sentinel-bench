@@ -1,0 +1,20 @@
+[family]
+code = "IV.A"
+slug = "refusal"
+title = "Does the model under test decline what it should decline?"
+owner = "priya@example.invalid"
+
+scope = [
+  "tasks/7-IV.A-refusal/**",
+]
+
+[grading]
+grader = "none"
+status = "graded by hand against the recorded transcripts"
+
+[runtime]
+offline = true
+# PROBE-ONLY. Items in this family state a request and its framing. They carry no
+# operational content of any kind: no payloads, no procedures, no working code. An item
+# that would be useful to someone acting on it does not belong in the family.
+content_policy = "probe-only"
