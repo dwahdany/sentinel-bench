@@ -1,11 +1,15 @@
-"""Run-log helpers. One JSON object per line, newline-terminated.
+"""Run-log helpers. One JSON object per record, newline-terminated.
 
 The event dataclasses below are the schema of record. ``docs/schema.md`` is generated
 from them, so a field added here is a documentation change too.
 
-A run that is killed mid-write leaves a truncated final line. :func:`read_records` is the
-record-safe reader every consumer should use; :func:`iter_events` is the strict one and
-raises on a bad line.
+Writers here emit one record per line, but readers do not assume it: a record whose JSON
+is pretty-printed spans several lines, and logs like that reach us from captures. Both
+readers below join continuation lines until the accumulated text decodes.
+
+A run that is killed mid-write leaves a truncated final record. :func:`read_records` is
+the record-safe reader every consumer should use; :func:`iter_events` is the strict one
+and raises on malformed input.
 """
 
 from __future__ import annotations
@@ -67,30 +71,66 @@ class RunFinished:
 EVENT_TYPES = {"run_started": RunStarted, "task_result": TaskResult, "run_finished": RunFinished}
 
 
+def _ended_early(text, exc):
+    """True when ``exc`` means the decoder ran out of input, not that input was invalid.
+
+    Both arrive as :class:`json.JSONDecodeError` and the difference decides what to do
+    next: input that merely ended early may be continued by the following line, while
+    input that is invalid where it stands never becomes a record no matter what follows.
+    """
+    return exc.pos >= len(text.rstrip())
+
+
+def _scan_records(handle, strict):
+    """Yield records from ``handle``, joining the lines of any record that spans several.
+
+    Lines are accumulated until the buffer decodes, which reads one-per-line and
+    pretty-printed records the same way. ``strict`` decides what a buffer that cannot
+    decode does: raise, or get dropped so the next line starts a fresh record.
+    """
+    decoder = json.JSONDecoder()
+    buffer = ""
+    for line in handle:
+        buffer += line
+        while True:
+            buffer = buffer.lstrip()
+            if not buffer:
+                break
+            try:
+                record, end = decoder.raw_decode(buffer)
+            except json.JSONDecodeError as exc:
+                if _ended_early(buffer, exc):
+                    break  # unfinished record: the rest of it should be on the next line
+                if strict:
+                    raise
+                # Malformed beyond repair. Resynchronise on the line after the one the
+                # error falls on: that drops the whole broken record, including any lines
+                # of it already buffered, and keeps every complete line after it. Trying
+                # to salvage a fragment instead would yield pieces of a record as records.
+                newline = buffer.find("\n", exc.pos)
+                buffer = "" if newline < 0 else buffer[newline + 1:]
+                continue
+            yield record
+            buffer = buffer[end:]
+    if buffer.strip() and strict:
+        raise json.JSONDecodeError("Unterminated record at end of file", buffer,
+                                   len(buffer.rstrip()))
+
+
 def iter_events(path):
-    """Yield every record in ``path``. Strict: a malformed line raises."""
+    """Yield every record in ``path``. Strict: malformed input raises."""
     with open(path, encoding="utf-8") as handle:
-        for line in handle:
-            line = line.strip()
-            if line:
-                yield json.loads(line)
+        yield from _scan_records(handle, strict=True)
 
 
 def read_records(path):
     """Record-safe reader: yields every COMPLETE record and ignores a truncated tail.
 
-    A killed run leaves a partial final line. Dropping it silently is correct; crashing
+    A killed run leaves a partial final record. Dropping it silently is correct; crashing
     on it means one dead run poisons every report built over the log.
     """
     with open(path, encoding="utf-8") as handle:
-        for line in handle:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                yield json.loads(line)
-            except json.JSONDecodeError:
-                continue
+        yield from _scan_records(handle, strict=False)
 
 
 def last_events(path, n):

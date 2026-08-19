@@ -4,6 +4,11 @@ All notable changes to sentinel-bench. Anything that changes what an automated r
 allowed to do gets an entry here, including changes described as internal.
 
 ## [Unreleased]
+### Fixed
+- `runlog.read_records` and `runlog.iter_events` read records whose JSON is spread over
+  several lines, which is what the 2026-08 captures contain. A malformed record in the
+  middle of a log still costs that record only: `read_records` resynchronises on the
+  next line instead of swallowing the remainder.
 
 ## [0.4.2] - 2026-07-28
 ### Added
